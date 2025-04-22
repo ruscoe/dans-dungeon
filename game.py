@@ -1,39 +1,6 @@
 import sys
 import json
-from dataclasses import dataclass, field
-from typing import List, Dict, Optional
-
-@dataclass
-class Details:
-    name: str
-    description: str
-    version: str
-
-@dataclass
-class LootItem:
-    name: str
-    type: str
-    damage: Optional[int] = None
-    defense: Optional[int] = None
-
-@dataclass
-class Monster:
-    name: str
-    health: int
-    damage: int
-
-@dataclass
-class Room:
-    name: str
-    description: str
-    exits: Dict[str, str]
-    monsters: List[Monster] = field(default_factory=list)
-
-@dataclass
-class GameConfig:
-    details: Details
-    loot: List[LootItem]
-    rooms: List[Room]
+from models import Details, LootItem, Monster, Room, GameConfig
 
 def parse_game_config(data: dict) -> GameConfig:
     details = Details(**data['details'])
