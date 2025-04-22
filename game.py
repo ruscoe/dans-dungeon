@@ -1,3 +1,13 @@
+"""
+Dan's Dungeon
+
+The main game script which initializes a default player character and displays a
+summary of the loaded game world.
+
+Usage:
+    python game.py <path_to_game_json_file>
+"""
+
 import sys
 import json
 from models import Details, LootItem, Monster, Player, Room, GameConfig
@@ -21,24 +31,49 @@ def parse_game_config(data: dict) -> GameConfig:
     return GameConfig(details=details, loot=loot, rooms=rooms)
 
 def print_commands():
-    print("Available commands:")
-    print("look  : Look around")
-    print("north : Move North")
-    print("south : Move South")
-    print("east  : Move East")
-    print("west  : Move West")
-    print("fight : Fight a monster")
-    print("quit  : Exit game")
+    print("look                           : Look around")
+    print("go north / south / east / west : Move in a direction")
+    print("fight                          : Fight a monster")
+    print("quit                           : Exit game")
 
 def look(room: Room) -> str:
-    description = f"Room: {room.name}\n"
-    description += f"Description: {room.description}\n"
-    description += "Exits: " + ", ".join(room.exits) + "\n"
-    if room.monsters:
-        description += "Monsters:\n"
-        for monster in room.monsters:
-            description += f"  - {monster.name} (Health: {monster.health}, Damage: {monster.damage})\n"
-    return description
+    print(f"\n{room.description}")
+    print("Exits:")
+    for direction, destination in room.exits.items():
+        print(f"  {direction.title()}: {destination}")
+        if room.monsters:
+            print("Monsters:")
+            for monster in room.monsters:
+                print(f"{monster.name} (HP: {monster.health}, DMG: {monster.damage})")
+
+def move(player: Player, room: Room, direction: str) -> str:
+    if direction in room.exits:
+        destination = room.exits[direction]
+        player.current_room = destination
+        print(f"You go {direction} to {destination}.")
+    else:
+        print(f"You can't go that way.")
+
+def game_loop(config: GameConfig, player: Player):
+    rooms_by_name = {room.name: room for room in config.rooms}
+
+    while True:
+        current_room = rooms_by_name.get(player.current_room)
+        print(f"\nYou are in: {current_room.name}")
+        command = input("> ").strip().lower()
+
+        if command == "quit":
+            print("Goodbye!")
+            break
+
+        elif command == "look":
+            look(current_room)
+
+        elif command.startswith("go "):
+            move(player, current_room, command.split(" ")[1])
+
+        else:
+            print("Unknown command.")
 
 def main():
     if len(sys.argv) != 2:
@@ -61,12 +96,9 @@ def main():
     print(f"Version     : {config.details.version}\n")
 
     player = Player(health=100, defense="", weapon="")
+    player.current_room = config.rooms[0].name
 
-    current_room = config.rooms[0].name
-
-    print(f"You are in the {current_room}")
-
-    print_commands()
+    game_loop(config, player)
 
 if __name__ == "__main__":
     main()
