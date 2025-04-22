@@ -15,5 +15,36 @@
             "type": "armor",
             "defense": 1
         }
+    ],
+    "rooms": [
+        {
+            "name": "Entrance Hall",
+            "description": "You are in a dimly lit hall. There are doors to the north and south.",
+            "exits": {
+                "north": "Library",
+                "south": "Armory"
+            }
+        },
+        {
+            "name": "Library",
+            "description": "You are in a dusty library filled with ancient tomes.",
+            "exits": {
+                "south": "Entrance Hall"
+            }
+        },
+        {
+            "name": "Armory",
+            "description": "You are in an armory filled with weapons and armor.",
+            "exits": {
+                "north": "Entrance Hall"
+            },
+            "monsters": [
+                {
+                    "name": "Goblin",
+                    "health": 10,
+                    "damage": 2
+                }
+            ]
+        }
     ]
 }
