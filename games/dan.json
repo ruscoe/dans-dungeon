@@ -1,0 +1,7 @@
+{
+    "details": {
+        "name":"Dan's Dungeon",
+        "description":"An example game where you explore a dungeon and fight monsters.",
+        "version":"1.0.0"
+    }
+}
