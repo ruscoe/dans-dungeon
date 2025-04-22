@@ -9,6 +9,7 @@ Usage:
 
 import sys
 import json
+import random
 from models import Chest, Details, LootItem, Monster, Player, Room, GameConfig
 
 def parse_game_config(data: dict) -> GameConfig:
@@ -86,6 +87,12 @@ def game_loop(config: GameConfig, player: Player):
                     else:
                         chest.opened = True
                         print(f"You open the {chest.name} and find loot!")
+
+                        # Give the player some random loot.
+                        loot = config.loot
+                        if loot:
+                            loot_item = random.choice(loot)
+                            print(f"You found {loot_item.name}")
 
         elif command == "help":
             help()
