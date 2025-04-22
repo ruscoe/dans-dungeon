@@ -9,7 +9,7 @@ Usage:
 
 import sys
 import json
-from models import Details, LootItem, Monster, Player, Room, GameConfig
+from models import Chest, Details, LootItem, Monster, Player, Room, GameConfig
 
 def parse_game_config(data: dict) -> GameConfig:
     details = Details(**data['details'])
@@ -18,12 +18,12 @@ def parse_game_config(data: dict) -> GameConfig:
 
     rooms = []
     for room in data.get('rooms', []):
-        monsters = [Monster(**m) for m in room.get('monsters', [])]
         room_obj = Room(
             name=room['name'],
             description=room['description'],
             exits=room['exits'],
-            monsters=monsters
+            chests=[Chest(**chest) for chest in room.get('chests', [])],
+            monsters=[Monster(**m) for m in room.get('monsters', [])]
         )
         rooms.append(room_obj)
 
@@ -36,14 +36,16 @@ def help():
     print("quit                           : Exit game\n")
 
 def look(room: Room):
-    print(f"\n{room.description}")
+    print(f"\n{room.description}\n")
     print("Exits:")
     for direction, destination in room.exits.items():
         print(f"  {direction.title()}: {destination}")
-        if room.monsters:
-            print("Monsters:")
-            for monster in room.monsters:
-                print(f"{monster.name} (HP: {monster.health}, DMG: {monster.damage})")
+    if room.chests:
+        for chest in room.chests:
+            print(f"You see a {chest.name}")
+    if room.monsters:
+        for monster in room.monsters:
+            print(f"{monster.name} (HP: {monster.health}, DMG: {monster.damage})")
 
 def move(player: Player, room: Room, direction: str):
     if direction in room.exits:

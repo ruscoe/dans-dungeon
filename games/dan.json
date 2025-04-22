@@ -20,6 +20,11 @@
         {
             "name": "Entrance Hall",
             "description": "You are in a dimly lit hall. There are doors to the north and south.",
+            "chests": [
+                {
+                    "name": "Treasure Chest"
+                }
+            ],
             "exits": {
                 "north": "Library",
                 "south": "Armory"
