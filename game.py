@@ -32,6 +32,7 @@ def parse_game_config(data: dict) -> GameConfig:
 def help():
     print("look                           : Look around")
     print("go north / south / east / west : Move in a direction")
+    print("open <chest_name>              : Open a chest")
     print("fight                          : Fight a monster")
     print("quit                           : Exit game\n")
 
@@ -63,18 +64,35 @@ def game_loop(config: GameConfig, player: Player):
         print(f"\nYou are in: {current_room.name}")
         command = input("> ").strip().lower()
 
-        if command == "quit":
-            print("Goodbye!")
-            break
-
-        elif command == "look":
+        if command == "look":
             look(current_room)
 
         elif command.startswith("go "):
             move(player, current_room, command.split(" ")[1])
 
+        elif command.startswith("open "):
+            # Split command by the first space to get the chest name.
+            parts = command.split(' ', 1)
+            if len(parts) < 2:
+                print("Please specify a chest name.")
+                continue
+            chest_name = parts[1].strip().lower()
+
+            # Check if the chest exists in the current room.
+            for chest in current_room.chests:
+                if chest.name.lower() == chest_name:
+                    if chest.opened:
+                        print(f"The {chest.name} is already opened.")
+                    else:
+                        chest.opened = True
+                        print(f"You open the {chest.name} and find loot!")
+
         elif command == "help":
             help()
+
+        elif command == "quit":
+            print("Goodbye!")
+            break
 
         else:
             print("Unknown command.")
