@@ -35,7 +35,7 @@ def print_commands():
     print("fight                          : Fight a monster")
     print("quit                           : Exit game")
 
-def look(room: Room) -> str:
+def look(room: Room):
     print(f"\n{room.description}")
     print("Exits:")
     for direction, destination in room.exits.items():
@@ -45,13 +45,13 @@ def look(room: Room) -> str:
             for monster in room.monsters:
                 print(f"{monster.name} (HP: {monster.health}, DMG: {monster.damage})")
 
-def move(player: Player, room: Room, direction: str) -> str:
+def move(player: Player, room: Room, direction: str):
     if direction in room.exits:
         destination = room.exits[direction]
         player.current_room = destination
         print(f"You go {direction} to {destination}.")
     else:
-        print(f"You can't go that way.")
+        print("You can't go that way.")
 
 def game_loop(config: GameConfig, player: Player):
     rooms_by_name = {room.name: room for room in config.rooms}
