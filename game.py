@@ -20,6 +20,16 @@ def parse_game_config(data: dict) -> GameConfig:
 
     return GameConfig(details=details, loot=loot, rooms=rooms)
 
+def print_commands():
+    print("Available commands:")
+    print("look  : Look around")
+    print("north : Move North")
+    print("south : Move South")
+    print("east  : Move East")
+    print("west  : Move West")
+    print("fight : Fight a monster")
+    print("quit  : Exit game")
+
 def look(room: Room) -> str:
     description = f"Room: {room.name}\n"
     description += f"Description: {room.description}\n"
@@ -55,6 +65,8 @@ def main():
     current_room = config.rooms[0].name
 
     print(f"You are in the {current_room}")
+
+    print_commands()
 
 if __name__ == "__main__":
     main()
