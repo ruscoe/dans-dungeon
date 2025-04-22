@@ -1,6 +1,6 @@
 import sys
 import json
-from models import Details, LootItem, Monster, Room, GameConfig
+from models import Details, LootItem, Monster, Player, Room, GameConfig
 
 def parse_game_config(data: dict) -> GameConfig:
     details = Details(**data['details'])
@@ -19,6 +19,16 @@ def parse_game_config(data: dict) -> GameConfig:
         rooms.append(room_obj)
 
     return GameConfig(details=details, loot=loot, rooms=rooms)
+
+def look(room: Room) -> str:
+    description = f"Room: {room.name}\n"
+    description += f"Description: {room.description}\n"
+    description += "Exits: " + ", ".join(room.exits) + "\n"
+    if room.monsters:
+        description += "Monsters:\n"
+        for monster in room.monsters:
+            description += f"  - {monster.name} (Health: {monster.health}, Damage: {monster.damage})\n"
+    return description
 
 def main():
     if len(sys.argv) != 2:
@@ -39,6 +49,12 @@ def main():
     print(f"Name        : {config.details.name}")
     print(f"Description : {config.details.description}")
     print(f"Version     : {config.details.version}\n")
+
+    player = Player(health=100, defense="", weapon="")
+
+    current_room = config.rooms[0].name
+
+    print(f"You are in the {current_room}")
 
 if __name__ == "__main__":
     main()
