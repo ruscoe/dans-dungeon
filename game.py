@@ -1,8 +1,7 @@
 """
 Dan's Dungeon
 
-The main game script which initializes a default player character and displays a
-summary of the loaded game world.
+A JSON-based game engine for a text-based dungeon crawlers.
 
 Usage:
     python game.py <path_to_game_json_file>
