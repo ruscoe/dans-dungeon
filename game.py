@@ -42,40 +42,48 @@ def look(room: Room):
     print("Exits:")
     for direction, destination in room.exits.items():
         print(f"  {direction.title()}: {destination}")
+    print ("\n")
+
     if room.chests:
         for chest in room.chests:
-            print(f"You see a {chest.name}")
+            print(f"You see a {chest.name}\n")
+
     if room.monsters:
         for monster in room.monsters:
-            print(f"{monster.name} (HP: {monster.health}, DMG: {monster.damage})")
+            print(f"{monster.name} (HP: {monster.health}, DMG: {monster.damage})\n")
 
 def move(player: Player, room: Room, direction: str):
     if direction in room.exits:
         destination = room.exits[direction]
         player.current_room = destination
-        print(f"You go {direction} to {destination}.")
+        print(f"You go {direction} to {destination}.\n")
     else:
-        print("You can't go that way.")
+        print("You can't go that way.\n")
 
 def game_loop(config: GameConfig, player: Player):
     rooms_by_name = {room.name: room for room in config.rooms}
 
     while True:
         current_room = rooms_by_name.get(player.current_room)
-        print(f"\nYou are in: {current_room.name}")
+        print(f"You are in: {current_room.name}\n")
+
+        # Get the user's command.
         command = input("> ").strip().lower()
 
+        # Look around.
         if command == "look":
             look(current_room)
 
+        # Move in a direction.
         elif command.startswith("go "):
             move(player, current_room, command.split(" ")[1])
 
+        # Open a chest.
         elif command.startswith("open "):
             # Split command by the first space to get the chest name.
             parts = command.split(' ', 1)
             if len(parts) < 2:
-                print("Please specify a chest name.")
+                print("Please specify a chest name.\n")
                 continue
             chest_name = parts[1].strip().lower()
 
@@ -83,26 +91,28 @@ def game_loop(config: GameConfig, player: Player):
             for chest in current_room.chests:
                 if chest.name.lower() == chest_name:
                     if chest.opened:
-                        print(f"The {chest.name} is already opened.")
+                        print(f"The {chest.name} is already opened.\n")
                     else:
                         chest.opened = True
-                        print(f"You open the {chest.name} and find loot!")
+                        print(f"You open the {chest.name} and find loot!\n")
 
                         # Give the player some random loot.
                         loot = config.loot
                         if loot:
                             loot_item = random.choice(loot)
-                            print(f"You found {loot_item.name}")
+                            print(f"You found {loot_item.name}\n")
 
+        # Display commands.
         elif command == "help":
             help()
 
+        # Exit the game.
         elif command == "quit":
-            print("Goodbye!")
+            print("Goodbye!\n")
             break
 
         else:
-            print("Unknown command.")
+            print("Unknown command.\n")
 
 def main():
     if len(sys.argv) != 2:
