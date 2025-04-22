@@ -29,11 +29,11 @@ def parse_game_config(data: dict) -> GameConfig:
 
     return GameConfig(details=details, loot=loot, rooms=rooms)
 
-def print_commands():
+def help():
     print("look                           : Look around")
     print("go north / south / east / west : Move in a direction")
     print("fight                          : Fight a monster")
-    print("quit                           : Exit game")
+    print("quit                           : Exit game\n")
 
 def look(room: Room):
     print(f"\n{room.description}")
@@ -71,6 +71,9 @@ def game_loop(config: GameConfig, player: Player):
         elif command.startswith("go "):
             move(player, current_room, command.split(" ")[1])
 
+        elif command == "help":
+            help()
+
         else:
             print("Unknown command.")
 
@@ -93,6 +96,7 @@ def main():
     print(f"Name        : {config.details.name}")
     print(f"Description : {config.details.description}")
     print(f"Version     : {config.details.version}\n")
+    print("Type 'help' for commands.\n")
 
     player = Player(health=100, defense="", weapon="")
     player.current_room = config.rooms[0].name
