@@ -39,9 +39,9 @@ def help():
     print("quit                           : Exit game\n")
 
 def stats(player: Player):
-    print(f"Health: {player.health}")
-    print(f"Defense: {player.defense}")
-    print(f"Weapon: {player.weapon}\n")
+    print(f"Health  : {player.health}")
+    print(f"Defense : {player.defense}")
+    print(f"Weapon  : {player.weapon}\n")
 
 def look(room: Room):
     print(f"\n{room.description}\n")
