@@ -57,7 +57,7 @@ def look(room: Room):
 
     if room.monsters:
         for monster in room.monsters:
-            print(f"{monster.name} (HP: {monster.health}, DMG: {monster.damage})\n")
+            print(f"You see a {monster.name} (HP: {monster.health}, DMG: {monster.damage})\n")
 
 def move(player: Player, room: Room, direction: str):
     if direction in room.exits:
