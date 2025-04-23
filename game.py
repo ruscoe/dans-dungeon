@@ -31,11 +31,17 @@ def parse_game_config(data: dict) -> GameConfig:
     return GameConfig(details=details, loot=loot, rooms=rooms)
 
 def help():
+    print("stats                          : Show your stats")
     print("look                           : Look around")
     print("go north / south / east / west : Move in a direction")
     print("open <chest_name>              : Open a chest")
     print("fight                          : Fight a monster")
     print("quit                           : Exit game\n")
+
+def stats(player: Player):
+    print(f"Health: {player.health}")
+    print(f"Defense: {player.defense}")
+    print(f"Weapon: {player.weapon}\n")
 
 def look(room: Room):
     print(f"\n{room.description}\n")
@@ -82,8 +88,12 @@ def game_loop(config: GameConfig, player: Player):
         # Get the user's command.
         command = input("> ").strip().lower()
 
+        # Show player stats.
+        if command == "stats":
+            stats(player)
+
         # Look around.
-        if command == "look":
+        elif command == "look":
             look(current_room)
 
         # Move in a direction.
