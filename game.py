@@ -79,14 +79,31 @@ def open_chest(chest_name: str, room: Room):
                 return True
     return False
 
+def fight(player: Player, monster: Monster):
+    # Player attacks the monster.
+    print(f"You attack the {monster.name} for {player.weapon.damage} damage.\n")
+    monster.health -= player.weapon.damage
+    if monster.health <= 0:
+        print(f"You defeated the {monster.name}!\n")
+    else:
+        # Monster attacks back.
+        if monster.health > 0:
+            print(f"The {monster.name} attacks you for {monster.damage} damage.\n")
+            player.health -= monster.damage
+
 def game_loop(config: GameConfig, player: Player):
     rooms_by_name = {room.name: room for room in config.rooms}
 
     while True:
+        # Check if the player is alive.
+        if player.health <= 0:
+            print("You have been defeated! Game over.\n")
+            break
+
         current_room = rooms_by_name.get(player.current_room)
         print(f"You are in: {current_room.name}\n")
 
-        # Get the user's command.
+        # Get the player's command.
         command = input("> ").strip().lower()
 
         # Show player stats.
@@ -105,9 +122,6 @@ def game_loop(config: GameConfig, player: Player):
         elif command.startswith("open "):
             # Split command by the first space to get the chest name.
             parts = command.split(' ', 1)
-            if len(parts) < 2:
-                print("Please specify a chest name.\n")
-                continue
             chest_name = parts[1].strip().lower()
 
             if (open_chest(chest_name, current_room)):
@@ -135,6 +149,21 @@ def game_loop(config: GameConfig, player: Player):
                                 player.weapon = loot_item
                         else:
                             player.weapon = loot_item
+
+        # Fight a monster.
+        elif command.startswith("fight "):
+            # Check if there are monsters
+            if current_room.monsters:
+                # Split command by the first space to get the monster name.
+                parts = command.split(' ', 1)
+                monster_name = parts[1].strip().lower()
+                for monster in current_room.monsters:
+                    if monster.name.lower() == monster_name:
+                        print(f"You engage the {monster.name} in battle!\n")
+                        fight(player, monster)
+                        break
+            else:
+                print("No monsters to fight here.\n")
 
         # Display commands.
         elif command == "help":

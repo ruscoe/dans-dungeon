@@ -50,7 +50,14 @@
             ],
             "exits": {
                 "north": "Dank Hallway"
-            }
+            },
+            "monsters": [
+                {
+                    "name": "Skeleton",
+                    "health": 5,
+                    "damage": 1
+                }
+            ]
         },
         {
             "name": "Dank Hallway",
