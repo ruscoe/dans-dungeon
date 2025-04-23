@@ -19,33 +19,53 @@
     "rooms": [
         {
             "name": "Entrance Hall",
-            "description": "You are in a dimly lit hall. There are doors to the north and south.",
+            "description": "You are in a dimly lit hall.",
             "chests": [
                 {
-                    "name": "Treasure Chest"
+                    "name": "Wooden Box"
                 }
             ],
             "exits": {
-                "north": "Library",
-                "south": "Armory"
+                "north": "Dank Hallway"
             }
         },
         {
-            "name": "Library",
-            "description": "You are in a dusty library filled with ancient tomes.",
+            "name": "Dank Hallway",
+            "description": "You are in a dank hallway. It smells funny.",
             "exits": {
+                "north": "Dining Room",
                 "south": "Entrance Hall"
             }
         },
         {
-            "name": "Armory",
-            "description": "You are in an armory filled with weapons and armor.",
+            "name": "Dining Room",
+            "description": "You are in a large dining room with a long table.",
+            "chests": [
+                {
+                    "name": "Wooden Box"
+                }
+            ],
             "exits": {
-                "north": "Entrance Hall"
+                "south": "Dank Hallway",
+                "east": "Library"
             },
             "monsters": [
                 {
-                    "name": "Goblin",
+                    "name": "Skeleton",
+                    "health": 5,
+                    "damage": 1
+                }
+            ]
+        },
+        {
+            "name": "Library",
+            "description": "You are in a dusty library filled with old books.",
+            "exits": {
+                "west": "Dining Room"
+            },
+            "monsters": [
+                {
+                    "name": "Zombie",
                     "health": 10,
                     "damage": 2
                 }
