@@ -55,7 +55,7 @@
                 {
                     "name": "Skeleton",
                     "health": 5,
-                    "damage": 1
+                    "damage": 2
                 }
             ]
         },
@@ -83,7 +83,7 @@
                 {
                     "name": "Skeleton",
                     "health": 5,
-                    "damage": 1
+                    "damage": 2
                 }
             ]
         },
@@ -97,7 +97,7 @@
                 {
                     "name": "Zombie",
                     "health": 10,
-                    "damage": 2
+                    "damage": 5
                 }
             ]
         }
