@@ -23,7 +23,7 @@ Run your game:
 ## Limitations
 
 * All rooms must have a unique name
-* Player always stats in the first room defined in the JSON "rooms" array
+* Player always starts in the first room defined in the JSON "rooms" array
 * Player may only carry one weapon and one armor item at a time
 
 ## License
