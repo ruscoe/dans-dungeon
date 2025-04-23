@@ -67,16 +67,13 @@ def move(player: Player, room: Room, direction: str):
     else:
         print("You can't go that way.\n")
 
-def open_chest(chest_name: str, room: Room):
-    # Check if the chest exists in the current room.
-    for chest in room.chests:
-        if chest.name.lower() == chest_name:
-            if chest.opened:
-                print(f"The {chest.name} is already opened.\n")
-            else:
-                chest.opened = True
-                print(f"You open the {chest.name} and find loot!\n")
-                return True
+def open_chest(chest: Chest):
+    if chest.opened:
+        print(f"The {chest.name} is already opened.\n")
+    else:
+        chest.opened = True
+        print(f"You open the {chest.name} and find loot!\n")
+        return True
     return False
 
 def fight(player: Player, monster: Monster):
@@ -120,35 +117,39 @@ def game_loop(config: GameConfig, player: Player):
 
         # Open a chest.
         elif command.startswith("open "):
+            # Check if the chest exists in the current room.
+            if current_room.chests:
             # Split command by the first space to get the chest name.
-            parts = command.split(' ', 1)
-            chest_name = parts[1].strip().lower()
+                parts = command.split(' ', 1)
+                chest_name = parts[1].strip().lower()
 
-            if (open_chest(chest_name, current_room)):
-                # Give the player some random loot.
-                loot = config.loot
-                if loot:
-                    loot_item = random.choice(loot)
-                    print(f"You found {loot_item.name}\n")
-                    if loot_item.type == "armor":
-                        # Handle armor loot.
-                        if player.armor:
-                            print(f"Replace your {player.armor.name} (DEF: {player.armor.defense}) with {loot_item.name} (DEF: {loot_item.defense}) ?\n")
-                            replace = input("Y/N > ").strip().lower()
-                            if replace == "y":
-                                player.armor = loot_item
-                        else:
-                            player.armor = loot_item
+                for chest in current_room.chests:
+                    if chest.name.lower() == chest_name:
+                        if (open_chest(chest)):
+                            # Give the player some random loot.
+                            loot = config.loot
+                            if loot:
+                                loot_item = random.choice(loot)
+                                print(f"You found {loot_item.name}\n")
+                                if loot_item.type == "armor":
+                                # Handle armor loot.
+                                    if player.armor:
+                                        print(f"Replace your {player.armor.name} (DEF: {player.armor.defense}) with {loot_item.name} (DEF: {loot_item.defense}) ?\n")
+                                        replace = input("Y/N > ").strip().lower()
+                                        if replace == "y":
+                                            player.armor = loot_item
+                                    else:
+                                        player.armor = loot_item
 
-                    elif loot_item.type == "weapon":
-                        # Handle weapon loot.
-                        if player.weapon:
-                            print(f"Replace your {player.weapon.name} (DMG: {player.weapon.damage}) with {loot_item.name} (DMG: {loot_item.damage})?\n")
-                            replace = input("Y/N > ").strip().lower()
-                            if replace == "y":
-                                player.weapon = loot_item
-                        else:
-                            player.weapon = loot_item
+                                elif loot_item.type == "weapon":
+                                    # Handle weapon loot.
+                                    if player.weapon:
+                                        print(f"Replace your {player.weapon.name} (DMG: {player.weapon.damage}) with {loot_item.name} (DMG: {loot_item.damage})?\n")
+                                        replace = input("Y/N > ").strip().lower()
+                                        if replace == "y":
+                                            player.weapon = loot_item
+                                    else:
+                                        player.weapon = loot_item
 
         # Fight a monster.
         elif command.startswith("fight "):
