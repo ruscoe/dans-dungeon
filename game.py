@@ -115,6 +115,10 @@ def game_loop(config: GameConfig, player: Player):
                 if loot:
                     loot_item = random.choice(loot)
                     print(f"You found {loot_item.name}\n")
+                    if loot_item.type == "armor":
+                        player.armor = loot_item.name
+                    elif loot_item.type == "weapon":
+                        player.weapon = loot_item.name
 
         # Display commands.
         elif command == "help":
