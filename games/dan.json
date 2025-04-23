@@ -11,9 +11,24 @@
             "damage": 1
         },
         {
+            "name": "Iron Sword",
+            "type": "weapon",
+            "damage": 2
+        },
+        {
+            "name": "Steel Sword",
+            "type": "weapon",
+            "damage": 3
+        },
+        {
             "name": "Hide Shield",
             "type": "armor",
             "defense": 1
+        },
+        {
+            "name": "Wooden Shield",
+            "type": "armor",
+            "defense": 2
         }
     ],
     "rooms": [
