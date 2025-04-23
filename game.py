@@ -149,7 +149,7 @@ def main():
     print(f"Version     : {config.details.version}\n")
     print("Type 'help' for commands.\n")
 
-    player = Player(health=100, defense="", weapon="")
+    player = Player(health=100, armor="", weapon="")
     player.current_room = config.rooms[0].name
 
     game_loop(config, player)
