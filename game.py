@@ -57,7 +57,10 @@ def look(room: Room):
 
     if room.monsters:
         for monster in room.monsters:
-            print(f"You see a {monster.name} (HP: {monster.health}, DMG: {monster.damage})\n")
+            if monster.health > 0:
+                print(f"You see a {monster.name} (HP: {monster.health}, DMG: {monster.damage})\n")
+            else:
+                print(f"You see a defeated {monster.name}.\n")
 
 def move(player: Player, room: Room, direction: str):
     if direction in room.exits:
@@ -77,6 +80,11 @@ def open_chest(chest: Chest):
     return False
 
 def fight(player: Player, monster: Monster):
+    # Check if the monster is alive.
+    if monster.health <= 0:
+        print(f"The {monster.name} has already been defeated!\n")
+        return
+
     # Player attacks the monster.
     print(f"You attack the {monster.name} for {player.weapon.damage} damage.\n")
     monster.health -= player.weapon.damage
