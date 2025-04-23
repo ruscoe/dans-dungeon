@@ -94,7 +94,15 @@ def fight(player: Player, monster: Monster):
         # Monster attacks back.
         if monster.health > 0:
             print(f"The {monster.name} attacks you for {monster.damage} damage.\n")
-            player.health -= monster.damage
+
+            # Check if the player has armor.
+            if player.armor:
+                damage_taken = max(0, monster.damage - player.armor.defense)
+                print(f"Your armor absorbs {monster.damage - damage_taken} damage.\n")
+            else:
+                damage_taken = monster.damage
+
+            player.health -= damage_taken
 
 def game_loop(config: GameConfig, player: Player):
     rooms_by_name = {room.name: room for room in config.rooms}
