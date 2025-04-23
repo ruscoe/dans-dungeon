@@ -98,7 +98,6 @@ def game_loop(config: GameConfig, player: Player):
             break
 
         current_room = rooms_by_name.get(player.current_room)
-        print(f"You are in: {current_room.name}\n")
 
         # Get the player's command.
         command = input("> ").strip().lower()
@@ -131,8 +130,9 @@ def game_loop(config: GameConfig, player: Player):
                             if loot:
                                 loot_item = random.choice(loot)
                                 print(f"You found {loot_item.name}\n")
-                                if loot_item.type == "armor":
+
                                 # Handle armor loot.
+                                if loot_item.type == "armor":
                                     if player.armor:
                                         print(f"Replace your {player.armor.name} (DEF: {player.armor.defense}) with {loot_item.name} (DEF: {loot_item.defense}) ?\n")
                                         replace = input("Y/N > ").strip().lower()
@@ -141,8 +141,8 @@ def game_loop(config: GameConfig, player: Player):
                                     else:
                                         player.armor = loot_item
 
+                                # Handle weapon loot.
                                 elif loot_item.type == "weapon":
-                                    # Handle weapon loot.
                                     if player.weapon:
                                         print(f"Replace your {player.weapon.name} (DMG: {player.weapon.damage}) with {loot_item.name} (DMG: {loot_item.damage})?\n")
                                         replace = input("Y/N > ").strip().lower()
@@ -204,6 +204,8 @@ def main():
 
     player = Player(health=100, armor=starting_armor, weapon=starting_weapon)
     player.current_room = config.rooms[0].name
+
+    print(f"You are in: {player.current_room}\n")
 
     game_loop(config, player)
 
