@@ -1,7 +1,7 @@
 """
 Dan's Dungeon
 
-A JSON-based game engine for a text-based dungeon crawlers.
+A JSON-based game engine for text-based dungeon crawlers.
 
 Usage:
     python game.py <path_to_game_json_file>
