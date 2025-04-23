@@ -60,6 +60,18 @@ def move(player: Player, room: Room, direction: str):
     else:
         print("You can't go that way.\n")
 
+def open_chest(chest_name: str, room: Room):
+    # Check if the chest exists in the current room.
+    for chest in room.chests:
+        if chest.name.lower() == chest_name:
+            if chest.opened:
+                print(f"The {chest.name} is already opened.\n")
+            else:
+                chest.opened = True
+                print(f"You open the {chest.name} and find loot!\n")
+                return True
+    return False
+
 def game_loop(config: GameConfig, player: Player):
     rooms_by_name = {room.name: room for room in config.rooms}
 
@@ -87,20 +99,12 @@ def game_loop(config: GameConfig, player: Player):
                 continue
             chest_name = parts[1].strip().lower()
 
-            # Check if the chest exists in the current room.
-            for chest in current_room.chests:
-                if chest.name.lower() == chest_name:
-                    if chest.opened:
-                        print(f"The {chest.name} is already opened.\n")
-                    else:
-                        chest.opened = True
-                        print(f"You open the {chest.name} and find loot!\n")
-
-                        # Give the player some random loot.
-                        loot = config.loot
-                        if loot:
-                            loot_item = random.choice(loot)
-                            print(f"You found {loot_item.name}\n")
+            if (open_chest(chest_name, current_room)):
+                # Give the player some random loot.
+                loot = config.loot
+                if loot:
+                    loot_item = random.choice(loot)
+                    print(f"You found {loot_item.name}\n")
 
         # Display commands.
         elif command == "help":
