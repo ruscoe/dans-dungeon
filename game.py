@@ -40,8 +40,8 @@ def help():
 
 def stats(player: Player):
     print(f"Health : {player.health}")
-    print(f"Armor  : {player.armor.name}") if player.armor else None
-    print(f"Weapon : {player.weapon.name}") if player.weapon else None
+    print(f"Armor  : {player.armor.name} (DEF: {player.armor.defense})") if player.armor else None
+    print(f"Weapon : {player.weapon.name} (DMG: {player.weapon.damage})") if player.weapon else None
     print("\n")
 
 def look(room: Room):
