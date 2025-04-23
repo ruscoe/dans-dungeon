@@ -39,9 +39,10 @@ def help():
     print("quit                           : Exit game\n")
 
 def stats(player: Player):
-    print(f"Health  : {player.health}")
-    print(f"Armor   : {player.armor}")
-    print(f"Weapon  : {player.weapon}\n")
+    print(f"Health : {player.health}")
+    print(f"Armor  : {player.armor.name}") if player.armor else None
+    print(f"Weapon : {player.weapon.name}") if player.weapon else None
+    print("\n")
 
 def look(room: Room):
     print(f"\n{room.description}\n")
@@ -116,9 +117,24 @@ def game_loop(config: GameConfig, player: Player):
                     loot_item = random.choice(loot)
                     print(f"You found {loot_item.name}\n")
                     if loot_item.type == "armor":
-                        player.armor = loot_item.name
+                        # Handle armor loot.
+                        if player.armor:
+                            print(f"Replace your {player.armor.name} (DEF: {player.armor.defense}) with {loot_item.name} (DEF: {loot_item.defense}) ?\n")
+                            replace = input("Y/N > ").strip().lower()
+                            if replace == "y":
+                                player.armor = loot_item
+                        else:
+                            player.armor = loot_item
+
                     elif loot_item.type == "weapon":
-                        player.weapon = loot_item.name
+                        # Handle weapon loot.
+                        if player.weapon:
+                            print(f"Replace your {player.weapon.name} (DMG: {player.weapon.damage}) with {loot_item.name} (DMG: {loot_item.damage})?\n")
+                            replace = input("Y/N > ").strip().lower()
+                            if replace == "y":
+                                player.weapon = loot_item
+                        else:
+                            player.weapon = loot_item
 
         # Display commands.
         elif command == "help":
@@ -153,7 +169,10 @@ def main():
     print(f"Version     : {config.details.version}\n")
     print("Type 'help' for commands.\n")
 
-    player = Player(health=100, armor="", weapon="")
+    starting_armor = LootItem(name="Holey Shield", type="armor", defense=1)
+    starting_weapon = LootItem(name="Broken Sword", type="weapon", damage=1)
+
+    player = Player(health=100, armor=starting_armor, weapon=starting_weapon)
     player.current_room = config.rooms[0].name
 
     game_loop(config, player)

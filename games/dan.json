@@ -29,6 +29,11 @@
             "name": "Wooden Shield",
             "type": "armor",
             "defense": 2
+        },
+        {
+            "name": "Iron Shield",
+            "type": "armor",
+            "defense": 3
         }
     ],
     "rooms": [
@@ -38,6 +43,9 @@
             "chests": [
                 {
                     "name": "Wooden Box"
+                },
+                {
+                    "name": "Iron Box"
                 }
             ],
             "exits": {
