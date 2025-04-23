@@ -40,7 +40,7 @@ def help():
 
 def stats(player: Player):
     print(f"Health  : {player.health}")
-    print(f"Defense : {player.defense}")
+    print(f"Armor   : {player.armor}")
     print(f"Weapon  : {player.weapon}\n")
 
 def look(room: Room):

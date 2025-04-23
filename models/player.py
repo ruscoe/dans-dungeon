@@ -3,6 +3,6 @@ from dataclasses import dataclass
 @dataclass
 class Player:
     health: int
-    defense: str
+    armor: str
     weapon: str
     current_room: str = None
