@@ -1,5 +1,5 @@
 
-![dans_dungeon_banner](https://github.com/user-attachments/assets/a7ed793d-785b-45c4-94ee-f45493131001)
+![dans_dungeon_banner](https://github.com/user-attachments/assets/babaeb5e-9a46-48a8-b812-65f0caf5f456)
 
 # Dan's Dungeon
 
