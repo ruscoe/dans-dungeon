@@ -14,6 +14,8 @@ from models import Chest, Details, LootItem, Monster, Player, Room, GameConfig
 
 def parse_game_config(data: dict) -> GameConfig:
     details = Details(**data['details'])
+    starting_weapon = LootItem(**data['starting_weapon'])
+    starting_armor = LootItem(**data['starting_armor'])
 
     loot = [LootItem(**item) for item in data.get('loot', [])]
 
@@ -28,7 +30,7 @@ def parse_game_config(data: dict) -> GameConfig:
         )
         rooms.append(room_obj)
 
-    return GameConfig(details=details, loot=loot, rooms=rooms)
+    return GameConfig(details=details, starting_weapon=starting_weapon, starting_armor=starting_armor, loot=loot, rooms=rooms)
 
 def help():
     print("stats                          : Show your stats")
@@ -215,8 +217,8 @@ def main():
     print(f"Version     : {config.details.version}\n")
     print("Type 'help' for commands.\n")
 
-    starting_armor = LootItem(name="Holey Shield", type="armor", defense=1)
-    starting_weapon = LootItem(name="Broken Sword", type="weapon", damage=1)
+    starting_weapon = config.starting_weapon
+    starting_armor = config.starting_armor
 
     player = Player(health=100, armor=starting_armor, weapon=starting_weapon)
     player.current_room = config.rooms[0].name

@@ -4,6 +4,16 @@
         "description":"An example game where you explore a dungeon and fight monsters.",
         "version":"1.0.0"
     },
+    "starting_weapon": {
+        "name": "Broken Sword",
+        "type": "weapon",
+        "damage": 1
+    },
+    "starting_armor": {
+        "name": "Holey Shield",
+        "type": "armor",
+        "defense": 1
+    },
     "loot": [
         {
             "name": "Wooden Sword of Minor Irritation",

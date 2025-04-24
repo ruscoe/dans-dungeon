@@ -7,5 +7,7 @@ from .room import Room
 @dataclass
 class GameConfig:
     details: Details
+    starting_weapon: LootItem
+    starting_armor: LootItem
     loot: List[LootItem]
     rooms: List[Room]
