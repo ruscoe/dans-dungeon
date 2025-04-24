@@ -5,6 +5,13 @@
 
 A dungeon crawler engine written in Python.
 
+## Features
+
+* Build your game world entirely in JSON
+* Navigate through the dungeon
+* Collect loot
+* Fight monsters
+
 ## Playing
 
 Run:
