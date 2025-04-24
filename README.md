@@ -51,14 +51,29 @@ Exits:
 
 You see a Wooden Box
 
-You are in: Entrance Hall
+You see a Iron Box
 
-> open wooden box
-You open the Wooden Box and find loot!
+You see a Skeleton (HP: 5, DMG: 2)
 
-You found Steel Sword
+> open iron box
 
-You are in: Entrance Hall
+You open the Iron Box and find loot!
+
+You found Wooden Shield
+
+Replace your Holey Shield (DEF: 1) with Wooden Shield (DEF: 2) ?
+
+Y/N > y
+
+> fight skeleton
+
+You engage the Skeleton in battle!
+
+You attack the Skeleton for 1 damage.
+
+The Skeleton attacks you for 2 damage.
+
+Your armor absorbs 2 damage.
 
 > _
 ```
