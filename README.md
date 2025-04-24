@@ -5,7 +5,7 @@
 
 A dungeon crawler engine written in Python.
 
-![dans-dungeon](https://github.com/user-attachments/assets/266d45a3-163a-4856-9d29-c69e23aa9d14)
+![dans-dungeon](https://github.com/user-attachments/assets/b86c7486-b576-4019-a7c2-f0017e63b42c)
 
 ## Features
 
