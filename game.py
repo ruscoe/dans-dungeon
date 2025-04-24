@@ -42,6 +42,7 @@ def help():
 
 def stats(player: Player):
     print(f"Health : {player.health}")
+    print(f"Gold   : {player.gold}")
     print(f"Armor  : {player.armor.name} (DEF: {player.armor.defense})") if player.armor else None
     print(f"Weapon : {player.weapon.name} (DMG: {player.weapon.damage})") if player.weapon else None
     print("\n")
@@ -92,6 +93,8 @@ def fight(player: Player, monster: Monster):
     monster.health -= player.weapon.damage
     if monster.health <= 0:
         print(f"You defeated the {monster.name}!\n")
+        print(f"You gained {monster.gold} gold!\n")
+        player.gold += monster.gold
     else:
         # Monster attacks back.
         if monster.health > 0:
@@ -220,7 +223,7 @@ def main():
     starting_weapon = config.starting_weapon
     starting_armor = config.starting_armor
 
-    player = Player(health=100, armor=starting_armor, weapon=starting_weapon)
+    player = Player(health=100, gold=0, armor=starting_armor, weapon=starting_weapon)
     player.current_room = config.rooms[0].name
 
     print(f"You are in: {player.current_room}\n")

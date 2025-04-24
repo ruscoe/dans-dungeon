@@ -65,7 +65,8 @@
                 {
                     "name": "Skeleton",
                     "health": 5,
-                    "damage": 2
+                    "damage": 2,
+                    "gold": 10
                 }
             ]
         },
@@ -93,7 +94,8 @@
                 {
                     "name": "Skeleton",
                     "health": 5,
-                    "damage": 2
+                    "damage": 2,
+                    "gold": 10
                 }
             ]
         },
@@ -107,7 +109,8 @@
                 {
                     "name": "Zombie",
                     "health": 10,
-                    "damage": 5
+                    "damage": 5,
+                    "gold": 20
                 }
             ]
         }
