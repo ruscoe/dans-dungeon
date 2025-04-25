@@ -18,7 +18,7 @@ A dungeon crawler engine written in Python.
 
 Run:
 
-`python game.py games/dan.json`
+`python3 game.py games/dan.json`
 
 ## Creating your own dungeon
 
@@ -30,7 +30,7 @@ Open the JSON file and modify the details, loot, rooms, and monsters.
 
 Run your game:
 
-`python game.py games/mygame.json`
+`python3 game.py games/mygame.json`
 
 ## Limitations
 
