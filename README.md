@@ -7,6 +7,10 @@ A dungeon crawler engine written in Python.
 
 ![dans-dungeon](https://github.com/user-attachments/assets/b86c7486-b576-4019-a7c2-f0017e63b42c)
 
+## Requirements
+
+* Python3
+
 ## Features
 
 * Build your game world entirely in JSON
